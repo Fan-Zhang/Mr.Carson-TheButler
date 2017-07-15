@@ -192,6 +192,10 @@
                         }
                     } else if (/^g /.test(input)) {
                         window.open('https://www.google.com/#q='+input.substring(2));
+                    } else if (/^h /.test(input)) {
+                        jQuery.get('/hello', {name: input}, function(data, status, jqXHR) {
+                            jQuery('#output').text(data);
+                        });
                     }
                     return false;
                 }

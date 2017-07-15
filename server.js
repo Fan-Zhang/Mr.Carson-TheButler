@@ -1,16 +1,12 @@
-var http = require('http');
-var fs = require('fs');
+const express = require('express')
+const app = express()
 
-var server = http.createServer(function (req, res) {
-    fs.readFile(decodeURIComponent(req.url.substr(1)), function(err, data) {
-        if (err === null) {
-            res.writeHead(200, {});
-            res.write(data);  // data is actually a buffer
-        }
+app.use(express.static('web'))
 
-        res.end();
-    });
-});
+app.get('/hello', function (req, res) {
+  res.send('Hello ' + req.query.name + '!')
+})
 
-server.listen(8088);
-
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!')
+})
