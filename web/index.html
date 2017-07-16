@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<!-- TODO: touch alert box
+<!-- TODO: 
             catch exception
             auto completion g -> google y -> yahoo  youtube amazon  see alfred web search
             add System function such as Empty Trash, Show Trash, Quit, Log Out, Sleep, Restart, Shut Down
             menu box
             change theme
-            server: googloe cloud
             sandbox
 -->
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mr. Carson - The Butler</title>
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Frontend script -->
+    <script src="js/front.js"></script>
 
     <!-- Custom styles -->
     <link href="css/style.css" rel="stylesheet">
@@ -23,8 +24,13 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
-    <!-- Icons -->
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"/>
+
+    <!-- Bootstrap JS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+    <title>Mr. Carson - The Butler</title>
   </head>
 
   <body>
@@ -101,10 +107,16 @@
                               <div class="panel-body">
                                 <ul>
                                     <li>Web Search</li>
+                                        <ul>
+                                            <li>Google: &emsp;&emsp;&nbsp;g/google + space + keywords</li>
+                                        </ul>
                                     <li>File Search</li>
                                     <li>Application Launching</li>
-                                    <li>Dictionary.</li>
-                                    <li>Calculator</li>
+                                        <ul>
+                                            <li>Dictionary: &nbsp;&nbsp;d/dic + space + word</li>
+                                            <li>Slack: &emsp;&emsp;&emsp;s/slack</li>
+                                        </ul>
+                                    <li>Calculator: &emsp;&emsp;= + arithmetic expression</li>
                                     <li>Password Management</li>
                                     <li>System</li>
                                 </ul>
@@ -140,18 +152,9 @@
 
             </div><!-- ./row -->
 
-
     </div><!-- /.container -->
 
-
     <div class="body-bg"></div> <!-- Background Pattern -->
-
-
-    <!-- jQuery Plugin -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <!-- Bootstrap JS -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.0/js/bootstrap.min.js"></script>
 
     <!-- Auto input text -->
     <script type="text/javascript">
@@ -170,36 +173,5 @@
     next_letter();
     </script>
 
-    <!-- Input Output -->
-    <script type="text/javascript">
-        jQuery('input')
-            .on('keypress', function() {
-                // on carriage return
-                if (event.which === 13) {
-                    var input = jQuery('input').val();
-                    console.log(input);
-
-                    // if input starts with '= ', invoke the calculator function
-                    if (/^= /.test(input)) {
-                        var expr = input.substring(2);
-                        // allowed symbols: + - * /  % () . 0-9 space
-                        var regex = /^[+-\\*/\d%() .]*$/;
-                        if (regex.test(expr)) {
-                            var output = eval(expr);
-                            jQuery('#output').text(output);
-                        } else {
-                            jQuery('#output').text('invalid expression');
-                        }
-                    } else if (/^g /.test(input)) {
-                        window.open('https://www.google.com/#q='+input.substring(2));
-                    } else if (/^h /.test(input)) {
-                        jQuery.get('/hello', {name: input}, function(data, status, jqXHR) {
-                            jQuery('#output').text(data);
-                        });
-                    }
-                    return false;
-                }
-            });
-    </script>
   </body>
 </html>

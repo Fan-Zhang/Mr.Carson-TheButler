@@ -12,9 +12,9 @@ html, body {
 
 
 .body-bg {
-    background: url("../images/pexels-photo-235985.jpeg");
+    /*background: url("../images/imageedit_1_4658929597.jpg");*/
+    /*background: url("../images/pexels-photo-235985.jpeg");*/
     background: url("../images/background-1866485_960_720.jpg");
-    background: url("../images/imageedit_1_4658929597.jpg");
     background-size: cover;
     height: 100%;
     left: 0;
@@ -197,7 +197,7 @@ aside h3 span {
 
 #accordion .panel-title {
 	color: #fff;
-	font-size: 28px;
+	font-size: 25px;
 	font-family: 'Roboto Slab', serif;
 	font-weight: 300;
 }
@@ -215,7 +215,6 @@ aside h3 span {
 #accordion .panel-body {
 	color: #fff;
 	font-family: 'Roboto Slab', serif;
-    /*font-weight: bold;*/
 	font-weight: 350;
 	text-align: justify;
 	font-size: 18px;
