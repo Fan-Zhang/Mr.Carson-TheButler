@@ -1,5 +1,6 @@
 // TODO AUTO-COMPLETION
 //      MANUAL  G GOOGLE SL SLACK
+//      MODIFY OUTPUT BOX TO SHOW NAV BAR
 /*** Frontend script ***/
 jQuery(document).ready(function() {
     jQuery('input')
@@ -29,8 +30,12 @@ jQuery(document).ready(function() {
                     jQuery.get('/app', {name: input}, function(data, status) {
                     });
                     // --- App: Slack --- //
-                } else if (/(s|slack)/.test(input)) {
+                } else if (/^(s|slack)/.test(input)) {
                     jQuery.get('/app', {name: input}, function(data, status) {
+                    });
+                } else if (/^'/.test(input)) {
+                    jQuery.get('/search', {name: input.substring(1)}, function(data, status) {
+                        jQuery('#output').text(data.toString());
                     });
                 }
                 return false;
