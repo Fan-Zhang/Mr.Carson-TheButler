@@ -1,6 +1,8 @@
 // TODO AUTO-COMPLETION
+//      AJAX
 //      MANUAL  G GOOGLE SL SLACK
 //      MODIFY OUTPUT BOX TO SHOW NAV BAR
+//      WHAT FEATURE IS ACTIVATED
 /*** Frontend script ***/
 jQuery(document).ready(function() {
     jQuery('input')
@@ -35,7 +37,11 @@ jQuery(document).ready(function() {
                     });
                 } else if (/^'/.test(input)) {
                     jQuery.get('/search', {name: input.substring(1)}, function(data, status) {
-                        jQuery('#output').text(data.toString());
+                        jQuery('#output')
+                            .css({
+                                'font-size':'17px',
+                            })
+                            .text(data.toString());
                     });
                 }
                 return false;

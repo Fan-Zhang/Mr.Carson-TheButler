@@ -1,8 +1,8 @@
 // TODO: ERROR IN CONSOLE GET http://localhost:3000/app?name=slack net::ERR_CONNECTION_REFUSED
-const express = require('express')
-const server = express()
+const express = require('express');
+const server = express();
 
-server.use(express.static('web'))
+server.use(express.static('web'));
 
 server.get('/app', function (req, res) {
 	//res.send('Hello ' + req.query.name + '!')
@@ -14,7 +14,7 @@ server.get('/app', function (req, res) {
 
     if (/^(d|dic) /.test(clientInput)) {
         parameters = ['dict://'+clientInputKeywords];
-    } else if (/(s|slack)/.test(clientInput)) {
+    } else if (/^(s|slack)/.test(clientInput)) {
         parameters = ['-a', 'Slack.app'];
     }
 
@@ -32,7 +32,7 @@ server.get('/search', function (req, res) {
 	var child = require('child_process').execFile;
     var clientInput = req.query.name;
     var cmd = 'find';
-    var parameters = ['/Users/fan/Documents', '-iname', '*'+clientInput+'*', '-mtime', '-30', '-type', 'f'];
+    var parameters = ['/Users/fan/Documents', '-iname', '*'+clientInput+'*', '-atime', '-30', '-type', 'f'];
 
 	child(cmd, parameters, function (err, data) {
 		if (err) {
