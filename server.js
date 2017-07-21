@@ -5,8 +5,8 @@ const server = express();
 server.use(express.static('web'));
 
 server.get('/app', function (req, res) {
-	//res.send('Hello ' + req.query.name + '!')
-	var child = require('child_process').execFile;
+    //res.send('Hello ' + req.query.name + '!')
+    var child = require('child_process').execFile;
     var clientInput = req.query.name;
     var clientInputKeywords = clientInput.substring(clientInput.indexOf(' ')+1);
     var cmd = 'open';
@@ -19,32 +19,31 @@ server.get('/app', function (req, res) {
     }
 
     // http://ourcodeworld.com/articles/read/154/how-to-execute-an-exe-file-system-application-using-electron-framework
-	child(cmd, parameters, function (err, data) {
-		if (err) {
-		console.error(err);
-        return;
-    }
-	console.log(data.toString());
-	})
+    child(cmd, parameters, function (err, data) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        console.log(data.toString());
+    });
 });
 
 server.get('/search', function (req, res) {
-	var child = require('child_process').execFile;
+    var child = require('child_process').execFile;
     var clientInput = req.query.name;
     var cmd = 'find';
     var parameters = ['/Users/fan/Documents', '-iname', '*'+clientInput+'*', '-atime', '-30', '-type', 'f'];
 
-	child(cmd, parameters, function (err, data) {
-		if (err) {
-		console.error(err);
-        return;
-    }
-	console.log(data.toString());
-    res.send(data);
-	})
-
+    child(cmd, parameters, function (err, data) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        console.log(data.toString());
+        res.send(data);
+    });
 });
 
 server.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-})
+    console.log('Listening on port 3000!')
+});
