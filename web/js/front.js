@@ -5,10 +5,10 @@
 //      WHAT FEATURE IS ACTIVATED
 /*** Frontend script ***/
 jQuery(document).ready(function() {
-    jQuery('input').on('keypress',
-        function() {
+    jQuery('#s').on('keypress',
+        function(evt) {
             // on carriage return
-            if (event.which === 13) {
+            if (evt.which === 13) {
                 var input = jQuery(this).val();
                 var inputKeywords = input.substring(input.indexOf(' ')+1);
                 updateOutputDiv(dispatch(input, inputKeywords))
@@ -45,7 +45,13 @@ function dispatch(input, inputKeywords)
     for (var i = 0; i < plugins.length; i++) {
         var plugin = plugins[i];
         if (plugin.pattern.test(input)) {
-            return plugin.action(input, inputKeywords, updateOutputDiv);
+            var pluginConfig = config ?  config.PluginConfig[plugin.id] : {};
+            return plugin.action(
+                pluginConfig,
+                input,
+                inputKeywords,
+                updateOutputDiv
+            );
         }
     }
 }
@@ -59,6 +65,7 @@ var plugins = [
      * and an action, which is executed when matched.
      *
      * Action is a function that takes
+     *     - the config object
      *     - the whole input string
      *     - the substring after the first space
      *     - a callback function that is executed
@@ -72,8 +79,8 @@ var plugins = [
     { id: 'file-search', pattern: /^'/,           action: fileSearch   },
 ];
 
-function calculator(input, inputKeywords, callback) {
-    // allowed symbols: + - * /  % space () . 0-9
+function calculator(config, input, inputKeywords, callback) {
+    // allowed symbols: + - * / % space () . 0-9
     var regex = /^[+-\\*/\d%() .]*$/;
     var output = '';
     if (regex.test(inputKeywords)) {
@@ -84,18 +91,18 @@ function calculator(input, inputKeywords, callback) {
     return output;
 }
 
-function googleSearch(input, inputKeywords, callback) {
+function googleSearch(config, input, inputKeywords, callback) {
     window.open('https://www.google.com/?q='+inputKeywords);
     return 'Opening new window...';
 }
 
-function openApp(input, inputKeywords, callback) {
-    jQuery.get('/app', {name: input}, function(data, status) {});
+function openApp(config, input, inputKeywords, callback) {
+    jQuery.get('/app', {name: input, config: config}, function(data, status) {});
     return 'Opening ' + input + ' ...';
 }
 
-function fileSearch(input, inputKeywords, callback) {
-    jQuery.get('/search', {name: input.substring(1)}, function(data, status) {
+function fileSearch(config, input, inputKeywords, callback) {
+    jQuery.get('/search', {name: input.substring(1), config: config}, function(data, status) {
         callback(data.toString());
     });
     return 'Searching...';

@@ -1,6 +1,10 @@
 {
     "PluginConfig": {
         "dict": {
+            "cmd": "xdg-open",
+            "url": "https://www.merriam-webster.com/dictionary/"
+        },
+        "slack": {
             "cmd": "xdg-open"
         },
         "file-search": {

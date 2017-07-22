@@ -5,15 +5,14 @@ const server = express();
 server.use(express.static('web'));
 
 server.get('/app', function (req, res) {
-    //res.send('Hello ' + req.query.name + '!')
     var child = require('child_process').execFile;
     var clientInput = req.query.name;
     var clientInputKeywords = clientInput.substring(clientInput.indexOf(' ')+1);
-    var cmd = 'open';
+    var cmd = req.query.config.cmd;
     var parameters = [];
 
     if (/^(d|dic) /.test(clientInput)) {
-        parameters = ['dict://'+clientInputKeywords];
+        parameters = [req.query.config.url + clientInputKeywords];
     } else if (/^(s|slack)/.test(clientInput)) {
         parameters = ['-a', 'Slack.app'];
     }
