@@ -1,0 +1,14 @@
+{
+    "PluginConfig": {
+        "dict": {
+            "cmd": "xdg-open"
+        },
+        "file-search": {
+            "paths": [ "/home/harry/Downloads/" ]
+        },
+        "keypass": {
+            "keepass": "CHANGE ME",
+            "password": "CHANGE ME"
+        }
+    }
+}

@@ -5,8 +5,8 @@
 //      WHAT FEATURE IS ACTIVATED
 /*** Frontend script ***/
 jQuery(document).ready(function() {
-    jQuery('input')
-        .on('keypress', function() {
+    jQuery('input').on('keypress',
+        function() {
             // on carriage return
             if (event.which === 13) {
                 var input = jQuery(this).val();
@@ -14,8 +14,31 @@ jQuery(document).ready(function() {
                 updateOutputDiv(dispatch(input, inputKeywords))
                 return false;
             }
-        });
+        }
+    );
+    jQuery('#config-drop-zone').on('dragover',
+        function(evt) {
+          evt.stopPropagation();
+          evt.preventDefault();
+          evt.originalEvent.dataTransfer.dropEffect = 'copy';
+        }
+    );
+    jQuery('#config-drop-zone').on('drop',
+        function(evt) {
+            evt.stopPropagation();
+            evt.preventDefault();
+            var configFile = evt.originalEvent.dataTransfer.files[0];
+            var reader = new FileReader();
+            reader.onload = function(evt) {
+                config = JSON.parse(evt.target.result);
+            };
+            reader.readAsText(configFile);
+            return false;
+        }
+    );
 });
+
+var config;
 
 function dispatch(input, inputKeywords)
 {
@@ -42,11 +65,11 @@ var plugins = [
      *       if an ajax call is made successfully.
      * Action returns a string that servers as an immediate feedback.
      */
-    { pattern: /^= /,          action: calculator   },
-    { pattern: /^(g|google) /, action: googleSearch },
-    { pattern: /^(d|dic) /,    action: openApp      },
-    { pattern: /^(s|slack) /,  action: openApp      },
-    { pattern: /^'/,           action: fileSearch   },
+    { id: 'calculator',  pattern: /^= /,          action: calculator   },
+    { id: 'google',      pattern: /^(g|google) /, action: googleSearch },
+    { id: 'dict',        pattern: /^(d|dic) /,    action: openApp      },
+    { id: 'slack',       pattern: /^(s|slack) /,  action: openApp      },
+    { id: 'file-search', pattern: /^'/,           action: fileSearch   },
 ];
 
 function calculator(input, inputKeywords, callback) {
@@ -63,17 +86,17 @@ function calculator(input, inputKeywords, callback) {
 
 function googleSearch(input, inputKeywords, callback) {
     window.open('https://www.google.com/?q='+inputKeywords);
-    return "Opening new window...";
+    return 'Opening new window...';
 }
 
 function openApp(input, inputKeywords, callback) {
     jQuery.get('/app', {name: input}, function(data, status) {});
-    return "Opening " + input + " ...";
+    return 'Opening ' + input + ' ...';
 }
 
 function fileSearch(input, inputKeywords, callback) {
     jQuery.get('/search', {name: input.substring(1)}, function(data, status) {
         callback(data.toString());
     });
-    return "Searching...";
+    return 'Searching...';
 }

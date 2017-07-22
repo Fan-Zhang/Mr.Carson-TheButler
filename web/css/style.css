@@ -1,12 +1,12 @@
 /*** General style ***/
 
 html, body {
-	min-height: 100%;
-	height: 100%;
+    min-height: 100%;
+    height: 100%;
 }
 
 .container-fluid {
-	min-height: 100%;
+    min-height: 100%;
     height: 100%;
 }
 
@@ -25,15 +25,15 @@ html, body {
 }
 
 .row-height {
-	height: 100%;
-	min-height: 100%;
-	display: block;
+    height: 100%;
+    min-height: 100%;
+    display: block;
 }
 
 .col-bg {
-	background: url("../images/input-bg.png") repeat;
-	height: 100%;
-	min-height: 100%;
+    background: url("../images/input-bg.png") repeat;
+    height: 100%;
+    min-height: 100%;
 }
 
 /* Animation */
@@ -44,7 +44,7 @@ html, body {
 
 
 .pop-in {
-	-webkit-animation: pop-in 2.5s;
+    -webkit-animation: pop-in 2.5s;
 }
 
 @-webkit-keyframes fade-me {
@@ -61,237 +61,251 @@ html, body {
 /* Header */
 
 .logo {
-	padding: 37px 0;
-	text-align: center;
+    padding: 37px 0;
+    text-align: center;
 }
 
 .logo div {
-	color: #fff;
-	font-size: 550%;
-	font-weight: 900;
-	font-family: 'Roboto Slab', serif;
-	text-transform: uppercase;
-	text-decoration: none;
-	text-shadow: 1px 1px 1px #000;
-	border: 1px dotted #fff;
-	border-radius: 3px;
-	-webkit-border-radius: 3px;
-	padding: 0 20px;
+    color: #fff;
+    font-size: 550%;
+    font-weight: 900;
+    font-family: 'Roboto Slab', serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px #000;
+    border: 1px dotted #fff;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    padding: 0 20px;
 }
 
 .logo div:hover {
-	background: url("../images/input-bg.png") repeat;
+    background: url("../images/input-bg.png") repeat;
 }
 
 
 /* Content */
 
 aside h1 {
-	color: #fff;
-	font-size: 60px;
-	font-weight: 900;
-	font-family: 'Roboto Slab', serif;
-	padding: 0 0 30px 0;
-	text-transform: uppercase;
-	text-shadow: 1px 1px 1px #000;
-	text-align: center;
+    color: #fff;
+    font-size: 60px;
+    font-weight: 900;
+    font-family: 'Roboto Slab', serif;
+    padding: 0 0 30px 0;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 1px #000;
+    text-align: center;
 }
 
 aside h3 {
-	color: #fff;
-	font-size: 22.5px;
-	font-weight: 100;
-	font-family: 'Roboto Slab', serif;
-	padding: 0 0 40px 0;
-	text-align: center;
+    color: #fff;
+    font-size: 22.5px;
+    font-weight: 100;
+    font-family: 'Roboto Slab', serif;
+    padding: 0 0 40px 0;
+    text-align: center;
 }
 
 aside h3 span {
-	font-weight: 700;
+    font-weight: 700;
+}
+
+#config-drop-zone {
+    color: #fff;
+    height: 200px;
+    width: 400px;
+    border: 2px dashed white;
+    border-radius: 20px;
+    margin: 40px;
+    font-size: 30px;
+    font-weight: bolder;
+    text-align: center;
+    line-height: 200px;
+    vertical-align: middle;
 }
 
 /* Unfold */
 
 .unfold .form-group {
-	position: relative;
+    position: relative;
 }
 
 .unfold input {
-	color: #fff;
-	font-family: 'Roboto Slab', serif;
-	font-size: 18px;
-	font-weight: 100;
-	border: 1px dotted #fff;
-	border-radius: 3px;
-	-webkit-border-radius: 3px;
-	background: url("../images/input-bg.png") repeat;
-	height: 50px;
+    color: #fff;
+    font-family: 'Roboto Slab', serif;
+    font-size: 18px;
+    font-weight: 100;
+    border: 1px dotted #fff;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background: url("../images/input-bg.png") repeat;
+    height: 50px;
 }
 
 .unfold .search-me {
-	position: absolute;
-	top: 15px;
-	right: 20px;
-	color: #fff;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #fff;
 }
 
 .unfold .search-me a {
-	color: #fff;
+    color: #fff;
 }
 
 .unfold .search-me a:hover i {
-	transform: scale(1.2);
-	-webkit-transform: scale(1.2);
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
 }
 
 .unfold .meniu_links {
-	width: 100%;
-	margin: 0 auto;
-	padding: 20px 0;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 0;
 }
 
 .unfold .meniu_links a {
-	color: #fff;
-	font-size: 18px;
-	font-family: 'Roboto Slab', serif;
-	font-weight: 100;
-	text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 100;
+    text-decoration: none;
 }
 
 .unfold .meniu_links a:hover i {
-	transform: scale(0.8);
-	-webkit-transform: scale(0.8);
+    transform: scale(0.8);
+    -webkit-transform: scale(0.8);
 }
 
 .unfold > #output {
-	font-family: 'Roboto Slab', serif;
+    font-family: 'Roboto Slab', serif;
     color: #fff;
-	font-size: 20px;
-	font-weight: 100;
+    font-size: 20px;
+    font-weight: 100;
     padding: 30px 40px;
-	border: 1px dotted #fff;
-	border-radius: 3px;
-	-webkit-border-radius: 3px;
-	background: url("../images/input-bg.png") repeat;
-	height: 100px;
-	margin: 30px 0px;
+    border: 1px dotted #fff;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background: url("../images/input-bg.png") repeat;
+    height: 100px;
+    margin: 30px 0px;
 }
 
 
 /* Accordion */
 
 #accordion {
-	padding: 40px 0;
+    padding: 40px 0;
 }
 
 #accordion .panel {
-	background-color: transparent;
-	border-radius: 3px;
-	border: 1px dotted #fff;
+    background-color: transparent;
+    border-radius: 3px;
+    border: 1px dotted #fff;
 }
 
 #accordion .panel-heading {
-	background: url("../images/input-bg.png") repeat;
-	background-color: none;
+    background: url("../images/input-bg.png") repeat;
+    background-color: none;
 }
 
 #accordion .panel-title {
-	color: #fff;
-	font-size: 25px;
-	font-family: 'Roboto Slab', serif;
-	font-weight: 300;
+    color: #fff;
+    font-size: 25px;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 300;
 }
 
 #accordion .panel-title a {
-	text-decoration: none;
-	display: block;
+    text-decoration: none;
+    display: block;
 }
 
 #accordion .panel-title a:hover i {
-	transform: scale(0.8);
-	-webkit-transform: scale(0.8);
+    transform: scale(0.8);
+    -webkit-transform: scale(0.8);
 }
 
 #accordion .panel-body {
-	color: #fff;
-	font-family: 'Roboto Slab', serif;
-	font-weight: 350;
-	text-align: justify;
-	font-size: 18px;
+    color: #fff;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 350;
+    text-align: justify;
+    font-size: 18px;
 }
 
 #accordion .panel-body li {
-	list-style-type:circle;
+    list-style-type:circle;
 }
 
 #accordion label {
-	border-bottom: 1px dotted #fff;
-	padding: 0 0 5px 0;
-	display: block;
+    border-bottom: 1px dotted #fff;
+    padding: 0 0 5px 0;
+    display: block;
 }
 
 
 /* Responsive utilities */
 
 @media (max-width: 767px) {
-	
-	.logo {
-		text-align: center;
-	}
-	
-	.logo a {
-		font-size: 60px;
-	}
-	
-	aside h1,aside h3 {
-		text-align: center;
-	}
-	
-	.unfold .meniu_links {
-		width: 100%;
-	}
-	
-	.unfold .meniu_links a {
-		font-size: 14px;
-	}
-	
-	#accordion {
-		padding: 10px 0;
-	}
-	
-	#accordion .panel-title {
-		font-size: 16px;
-	}
 
-	#accordion .panel-body {
-		font-size: 12px;
-	}
-	
-	footer {
-		text-align: center;
-		font-size: 12px;
-	}
+    .logo {
+        text-align: center;
+    }
+
+    .logo a {
+        font-size: 60px;
+    }
+
+    aside h1,aside h3 {
+        text-align: center;
+    }
+
+    .unfold .meniu_links {
+        width: 100%;
+    }
+
+    .unfold .meniu_links a {
+        font-size: 14px;
+    }
+
+    #accordion {
+        padding: 10px 0;
+    }
+
+    #accordion .panel-title {
+        font-size: 16px;
+    }
+
+    #accordion .panel-body {
+        font-size: 12px;
+    }
+
+    footer {
+        text-align: center;
+        font-size: 12px;
+    }
 }
 
 @media (max-width: 1024px) {
-	body {
-		height: auto;
-	}
+    body {
+        height: auto;
+    }
 }
 
 @media (max-width: 480px) {
-	.logo {
-		padding: 20px 0;
-	}
-	
-	.logo a {
-		font-size: 250%;
-		padding: 0 20px;
-	}
-	
-	aside h1 {
-		
-		font-size: 300%;
-		padding: 0 0 15px 0;
-	}
+    .logo {
+        padding: 20px 0;
+    }
+
+    .logo a {
+        font-size: 250%;
+        padding: 0 20px;
+    }
+
+    aside h1 {
+
+        font-size: 300%;
+        padding: 0 0 15px 0;
+    }
 }
