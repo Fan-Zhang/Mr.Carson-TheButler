@@ -64,18 +64,19 @@
                                     <input
                                         type="search"
                                         class="form-control"
-                                        value="What are you looking for?"
-                                        onblur="if (this.value == '') {this.value = 'What are you looking for?';}"
-                                        onfocus="if (this.value == 'What are you looking for?') {this.value = '';}"
-                                        id="s">
+                                        value="Please provide a config file to continue."
+                                        onblur="if (this.value == '') {this.value = 'How may I help you, sir/ma\'am?';}"
+                                        onfocus="if (this.value == 'How may I help you, sir/ma\'am?') {this.value = '';}"
+                                        id="s"
+                                        disabled>
                                     <div class="search-me"><a href="#"><i class="fa fa-search"></i></a></div>
                                 </div>
                             </form>
 
-                            <div class="meniu_links">
+                            <!-- <div class="meniu_links">
                             <a href="#" class="pull-left"><i class="fa fa-angle-double-left"></i> Go back</a>
                             <a href="#" class="pull-right">Go to next <i class="fa fa-angle-double-right"></i></a>
-                            </div><!-- ./meniu_links -->
+                            </div>./meniu_links -->
 
                             <output id="output"><output>
                         </div><!-- ./unfold -->
@@ -168,7 +169,7 @@
 
     <div class="body-bg"></div> <!-- Background Pattern -->
 
-    <!-- Auto input text -->
+    <!-- Auto input text
     <script type="text/javascript">
     var s = document.getElementById('s');
 
@@ -180,7 +181,7 @@
             s.value = type_this.substr(0, index++);
             setTimeout("next_letter()", 80);
         }
-    }
+    } -->
 
     next_letter();
     </script>
