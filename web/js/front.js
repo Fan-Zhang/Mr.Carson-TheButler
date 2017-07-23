@@ -95,11 +95,12 @@ var plugins = [
      * Action returns a string that serves as an immediate feedback.
      * Action may throw exceptions.
      */
-    { id: 'calculator',  pattern: /^= /,          action: calculator   },
-    { id: 'google',      pattern: /^(g|google) /, action: googleSearch },
-    { id: 'dict',        pattern: /^(d|dic) /,    action: openApp      },
-    { id: 'slack',       pattern: /^(s|slack) /,  action: openApp      },
-    { id: 'file-search', pattern: /^'/,           action: fileSearch   },
+    { id: 'calculator',  pattern: /^= /,          action: calculator    },
+    { id: 'google',      pattern: /^(g|google) /, action: googleSearch  },
+    { id: 'dict',        pattern: /^(d|dic) /,    action: openApp       },
+    { id: 'slack',       pattern: /^(s|slack) /,  action: openApp       },
+    { id: 'file-search', pattern: /^'/,           action: fileSearch    },
+    { id: 'keepass',     pattern: /^k|kee /,      action: keePassSearch },
 ];
 
 function calculator(config, input, pluginInput, callback) {
@@ -136,6 +137,16 @@ function openApp(config, input, pluginInput, callback) {
 function fileSearch(config, input, pluginInput, callback) {
     jQuery.get('/search',
                { input: input.substring(1), config: config },
+               function(data, status) {
+                   callback(data);
+               }
+    );
+    return 'Searching...';
+}
+
+function keePassSearch(config, input, pluginInput, callback) {
+    jQuery.get('/keepass',
+               { input: input, config: config },
                function(data, status) {
                    callback(data);
                }

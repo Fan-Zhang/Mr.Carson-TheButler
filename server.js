@@ -2,6 +2,7 @@
 const express = require('express');
 const server = express();
 const { execFile } = require('child_process');
+const kpio = require('keepass.io');
 
 server.use(express.static('web'));
 
@@ -20,8 +21,8 @@ server.get('/app', function (req, res) {
             res.send("Server: Invalid input or configuration.");
             return;
         }
-        var pluginInput = input.substring(input.indexOf(' ')+1);
-        params = [req.query.config.url + pluginInput];
+        var key = input.substring(input.indexOf(' ')+1);
+        params = [req.query.config.url + key];
     } else if (/^(s|slack)/.test(input)) {
         params = ['-a', 'Slack.app'];
     }
@@ -54,6 +55,40 @@ server.get('/search', function (req, res) {
             res.send(stdout);
         }
     });
+});
+
+server.get('/keepass', function (req, res) {
+    if (!(req.query.input && req.query.config && req.query.config.file && req.query.config.password)) {
+        res.send("Server: Invalid input or configuration.");
+        return;
+    }
+
+    var input = req.query.input;
+    var key = input.substring(input.indexOf(' ')+1);
+    var db = new kpio.Database();
+    db.addCredential(new kpio.Credentials.Password(req.query.config.password));
+    db.loadFile(req.query.config.file, function(err) {
+        if (err) {
+            res.send('Server: Failed to open KeePass database.');
+        } else {
+            var rawDatabase = db.getRawApi().get();
+            var rootGroup = rawDatabase.KeePassFile.Root.Group;
+            var allEntries = traverseGroup(rootGroup);
+            console.log(allEntries[0].String);
+            res.send(allEntries[0].String);
+        }
+    });
+
+    function traverseGroup(t) {
+        var entries = t.Entry ? t.Entry : [];
+        var subGroups = t.Group;
+        if (subGroups) {
+            for (var i = 0; i < subGroups.length; i++) {
+                entries.concat(traverseGroup(subGroups[i]));
+            }
+        }
+        return entries;
+    };
 });
 
 server.listen(3000, function () {

@@ -10,9 +10,9 @@
         "file-search": {
             "paths": [ "/home/harry/Downloads/" ]
         },
-        "keypass": {
-            "keepass": "CHANGE ME",
-            "password": "CHANGE ME"
+        "keepass": {
+            "file": "/home/harry/mr.carson/test.kdbx",
+            "password": "kee"
         }
     }
 }
