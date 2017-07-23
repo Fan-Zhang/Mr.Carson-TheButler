@@ -148,8 +148,21 @@ function keePassSearch(config, input, pluginInput, callback) {
     jQuery.get('/keepass',
                { input: input, config: config },
                function(data, status) {
-                   callback(data);
+                   callback(data.map(entryToString).join("\n\n"));
                }
     );
     return 'Searching...';
+}
+
+// helper functions of the KeePass plugin
+function entryToString(e) {
+    return e.map(pairToString).join("\n");
+}
+
+function pairToString(p) {
+    if (p.Key === 'Password') {
+        return 'Password: ' + p.Value._;
+    } else {
+        return p.Key + ': ' + p.Value;
+    }
 }

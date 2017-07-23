@@ -64,7 +64,7 @@ server.get('/keepass', function (req, res) {
     }
 
     var input = req.query.input;
-    var key = input.substring(input.indexOf(' ')+1);
+    var key = input.substring(input.indexOf(' ')+1).toLowerCase();
     var db = new kpio.Database();
     db.addCredential(new kpio.Credentials.Password(req.query.config.password));
     db.loadFile(req.query.config.file, function(err) {
@@ -74,8 +74,8 @@ server.get('/keepass', function (req, res) {
             var rawDatabase = db.getRawApi().get();
             var rootGroup = rawDatabase.KeePassFile.Root.Group;
             var allEntries = traverseGroup(rootGroup);
-            console.log(allEntries[0].String);
-            res.send(allEntries[0].String);
+            var matchedEntries = allEntries.filter(titleContains(key));
+            res.send(matchedEntries.map(function(e) { return e.String }));
         }
     });
 
@@ -88,7 +88,19 @@ server.get('/keepass', function (req, res) {
             }
         }
         return entries;
-    };
+    }
+
+    function titleContains(key) {
+        return function(e) {
+            var pairs = e.String;
+            for (var i = 0; i < pairs.length; i++) {
+                if (pairs[i].Key === 'Title' && pairs[i].Value.toLowerCase().indexOf(key) != -1) {
+                    return true;
+                }
+            }
+            return false;
+        };
+    }
 });
 
 server.listen(3000, function () {
