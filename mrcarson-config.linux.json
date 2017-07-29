@@ -1,0 +1,18 @@
+{
+    "PluginConfig": {
+        "dict": {
+            "cmd": "xdg-open",
+            "url": "https://www.merriam-webster.com/dictionary/"
+        },
+        "slack": {
+            "cmd": "xdg-open"
+        },
+        "file-search": {
+            "paths": [ "/home/harry/Downloads/" ]
+        },
+        "keepass": {
+            "file": "/home/harry/mr.carson/test.kdbx",
+            "password": "kee"
+        }
+    }
+}

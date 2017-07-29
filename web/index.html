@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- TODO: 
+<!-- TODO:
             catch exception
             auto completion g -> google y -> yahoo  youtube amazon  see alfred web search
             add System function such as Empty Trash, Show Trash, Quit, Log Out, Sleep, Restart, Shut Down
@@ -9,7 +9,7 @@
 -->
 <html lang="en">
   <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Mr. Carson - The Butler</title>
@@ -27,7 +27,7 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
-	<!-- Icons -->
+    <!-- Icons -->
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
     <!-- Bootstrap CSS -->
@@ -64,20 +64,21 @@
                                     <input
                                         type="search"
                                         class="form-control"
-                                        value="What are you looking for?"
-                                        onblur="if (this.value == '') {this.value = 'What are you looking for?';}"
-                                        onfocus="if (this.value == 'What are you looking for?') {this.value = '';}"
-                                        id="s">
+                                        value="Please provide a config file to continue."
+                                        onblur="if (this.value == '') {this.value = 'How may I help you, sir/ma\'am?';}"
+                                        onfocus="if (this.value == 'How may I help you, sir/ma\'am?') {this.value = '';}"
+                                        id="s"
+                                        disabled>
                                     <div class="search-me"><a href="#"><i class="fa fa-search"></i></a></div>
                                 </div>
                             </form>
 
-                            <div class="meniu_links">
+                            <!-- <div class="meniu_links">
                             <a href="#" class="pull-left"><i class="fa fa-angle-double-left"></i> Go back</a>
                             <a href="#" class="pull-right">Go to next <i class="fa fa-angle-double-right"></i></a>
-                            </div><!-- ./meniu_links -->
+                            </div>./meniu_links -->
 
-                            <div id="output"><div>
+                            <output id="output"><output>
                         </div><!-- ./unfold -->
 
                     </aside><!-- ./aside -->
@@ -85,6 +86,7 @@
                 </div><!-- ./col-md-5 -->
 
                     <div class="col-md-5 col-md-offset-2">
+                    <div id="config-drop-zone">Drop config file here!</div>
                     <div class="panel-group" id="accordion">
                           <div class="panel panel-default">
                             <div class="panel-heading">
@@ -96,8 +98,13 @@
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse in">
                               <div class="panel-body">
-                                <p>This is a web-based productivity helper that allows a user to use the keyboard to perform tasks  quickly, such as searching online, searching the filesystem, retrieving passwords, and launching applications.
-</p>
+                                <p>
+                                  Mr.Carson is a web-based productivity helper
+                                  that allows a user to use the keyboard to
+                                  perform tasks  quickly, such as searching
+                                  online, searching the filesystem, retrieving
+                                  passwords, and launching applications.
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -162,7 +169,7 @@
 
     <div class="body-bg"></div> <!-- Background Pattern -->
 
-    <!-- Auto input text -->
+    <!-- Auto input text
     <script type="text/javascript">
     var s = document.getElementById('s');
 
@@ -174,7 +181,7 @@
             s.value = type_this.substr(0, index++);
             setTimeout("next_letter()", 80);
         }
-    }
+    } -->
 
     next_letter();
     </script>
