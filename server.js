@@ -2,7 +2,8 @@
 const express = require('express');
 const server = express();
 
-server.use(express.static('web'));
+//server.use(express.static(__dirname + 'web'));
+server.use('/', express.static(__dirname + 'web'));
 
 server.get('/app', function (req, res) {
 	//res.send('Hello ' + req.query.name + '!')
