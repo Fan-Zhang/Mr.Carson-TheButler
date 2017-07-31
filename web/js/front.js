@@ -1,12 +1,14 @@
 // TODO AUTO-COMPLETION
+//      webSearch: Max
+//      merge webSearch url to plugins
 //      AJAX
 //      MANUAL  G GOOGLE SL SLACK
 //      MODIFY OUTPUT BOX TO SHOW NAV BAR
 //      WHAT FEATURE IS ACTIVATED
+
 /*** Frontend script ***/
 jQuery(document).ready(function() {
-    jQuery('#s').on('keypress',
-        function(evt) {
+    jQuery('#s').on('keypress', function(evt) {
             // on carriage return
             if (evt.which === 13) {
                 var input = jQuery(this).val();
@@ -15,15 +17,15 @@ jQuery(document).ready(function() {
             }
         }
     );
-    jQuery('#config-drop-zone').on('dragover',
-        function(evt) {
+
+    jQuery('#config-drop-zone').on('dragover', function(evt) {
           evt.stopPropagation();
           evt.preventDefault();
           evt.originalEvent.dataTransfer.dropEffect = 'copy';
         }
     );
-    jQuery('#config-drop-zone').on('drop',
-        function(evt) {
+
+    jQuery('#config-drop-zone').on('drop', function(evt) {
             evt.stopPropagation();
             evt.preventDefault();
             if (evt.originalEvent.dataTransfer.files.length != 1) {
@@ -48,18 +50,20 @@ jQuery(document).ready(function() {
             return false;
         }
     );
-});
+
+});  // jQuery(document).ready(function() {...});
 
 var config = {};
 
 function dispatch(input)
 {
     // If no space's found, indexOf() returns -1,
-    // then pluginInput is the same as input
+    // then `pluginInput` is the same as `input`
     var pluginInput = input.substring(input.indexOf(' ')+1);
     for (var i = 0; i < plugins.length; i++) {
         var plugin = plugins[i];
         if (plugin.pattern.test(input)) {
+            // `pluginConfig` could be `undefined` if not in the config file
             var pluginConfig = config.PluginConfig[plugin.id];
             var output = '';
             try {
@@ -96,10 +100,17 @@ var plugins = [
      * Action may throw exceptions.
      */
     { id: 'calculator',  pattern: /^= /,          action: calculator    },
-    { id: 'google',      pattern: /^(g|google) /, action: googleSearch  },
+    { id: 'google',      pattern: /^(g|google) /, action: webSearch     },
+    { id: 'lucky',      pattern: /^lucky /, action: webSearch     },
+    { id: 'youtube',     pattern: /^(yo|youtube) /, action: webSearch   },
+    { id: 'yahoo',       pattern: /^(y|yahoo) /, action: webSearch      },
+    { id: 'bing',        pattern: /^(b|bing) /, action: webSearch       },
+    { id: 'amazon',        pattern: /^(a|amazon) /, action: webSearch       },
+    { id: 'maps',        pattern: /^maps /, action: webSearch       },
     { id: 'dict',        pattern: /^(d|dic) /,    action: openApp       },
-    { id: 'slack',       pattern: /^(s|slack) /,  action: openApp       },
+    { id: 'slack',       pattern: /^(s|slack)/,  action: openApp        },
     { id: 'file-search', pattern: /^'/,           action: fileSearch    },
+    { id: 'file-open', pattern: /^\//,           action: openApp    },
     { id: 'keepass',     pattern: /^k|kee /,      action: keePassSearch },
 ];
 
@@ -115,8 +126,25 @@ function calculator(config, input, pluginInput, callback) {
     return output;
 }
 
-function googleSearch(config, input, pluginInput, callback) {
-    var newWindow = window.open('https://www.google.com/?q='+pluginInput);
+function webSearch(config, input, pluginInput, callback) {
+    var newWindow = null;
+    if (/^(g|google) /.test(input)) {
+        newWindow = window.open('https://www.google.com/search?q='+encodeURIComponent(pluginInput));
+    } else if (/^lucky /.test(input)) {
+        newWindow = window.open('http://www.google.com/search?q='+encodeURIComponent(pluginInput)+'&btnI');
+    } else if (/^(yo|youtube) /.test(input)) {
+        newWindow = window.open('https://www.youtube.com/results?search_query='+encodeURIComponent(pluginInput));
+    } else if (/^(y|yahoo) /.test(input)) {
+        newWindow = window.open('https://search.yahoo.com/search?p='+encodeURIComponent(pluginInput));
+    } else if (/^(b|bing) /.test(input)) {
+        newWindow = window.open('https://www.bing.com/search?q='+encodeURIComponent(pluginInput));
+    } else if (/^(a|amazon) /.test(input)) {
+        newWindow = window.open('https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords='+encodeURIComponent(pluginInput));
+    } else if (/^maps /.test(input)) {
+		// https://developers.google.com/maps/documentation/urls/guide
+        newWindow = window.open('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(pluginInput))
+    }
+
     if (newWindow) {
         return 'Opening new window...';
     } else {
@@ -138,7 +166,17 @@ function fileSearch(config, input, pluginInput, callback) {
     jQuery.get('/search',
                { input: input.substring(1), config: config },
                function(data, status) {
-                   callback(data);
+                   var arr = data.split('\n');
+                   var result = [];
+                   for (var i in arr) {
+                       if (arr[i] != '') {
+                           result.push(arr[i].link('#'));
+                       }
+                   }
+                   jQuery('#output').html(result.join('\n'));
+                   jQuery('#output a').on('click', function() {
+                       dispatch(jQuery(this).text());
+                   });
                }
     );
     return 'Searching...';

@@ -4,8 +4,7 @@ const server = express();
 const { execFile } = require('child_process');
 const kpio = require('keepass.io');
 
-//server.use(express.static(__dirname + 'web'));
-server.use('/', express.static(__dirname + 'web'));
+server.use('/', express.static(__dirname + '/web'));
 
 server.get('/app', function (req, res) {
     if (!(req.query.input && req.query.config && req.query.config.cmd)) {
@@ -18,17 +17,16 @@ server.get('/app', function (req, res) {
     var params = [];
 
     if (/^(d|dic) /.test(input)) {
-        if (!req.query.config.url) {
-            res.send("Server: Invalid input or configuration.");
-            return;
-        }
         var key = input.substring(input.indexOf(' ')+1);
-        params = [req.query.config.url + key];
+        params = [req.query.config.url+key];
     } else if (/^(s|slack)/.test(input)) {
         params = ['-a', 'Slack.app'];
+    } else if (/^\//.test(input)) {
+        params = [input];
     }
 
     // http://ourcodeworld.com/articles/read/154/how-to-execute-an-exe-file-system-application-using-electron-framework
+    // https://nodejs.org/api/child_process.html#child_process_child_process_execfile_file_args_options_callback
     execFile(cmd, params, function (err, stdout, stderr) {
         if (err) {
             res.send('Server: Failed to open app.');

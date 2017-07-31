@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <!-- TODO:
+            fix how may I help you sir
             catch exception
             auto completion g -> google y -> yahoo  youtube amazon  see alfred web search
             add System function such as Empty Trash, Show Trash, Quit, Log Out, Sleep, Restart, Shut Down
@@ -122,8 +123,14 @@
                                     <li>Web Search</li>
                                         <ul>
                                             <li>Google: &emsp;&emsp;&nbsp;g/google + space + keywords</li>
+                                            <li>Google - I'm Feeling Lucky: &emsp;&emsp;&nbsp;lucky + space + keywords</li>
+                                            <li>Google - Maps: &emsp;&emsp;&nbsp;maps + space + keywords</li>
+                                            <li>Bing: &emsp;&emsp;&nbsp;b/bing + space + keywords</li>
+                                            <li>Yahoo: &emsp;&emsp;&nbsp;y/yahoo + space + keywords</li>
+                                            <li>Youtube: &emsp;&emsp;&nbsp;yo/yutube + space + keywords</li>
+                                            <li>Amazon: &emsp;&emsp;&nbsp;a/amazon + space + keywords</li>
                                         </ul>
-                                    <li>File Search</li>
+                                    <li>File Search: &emsp;&emsp;' + keywords</li>
                                     <li>Application Launching</li>
                                         <ul>
                                             <li>Dictionary: &nbsp;&nbsp;d/dic + space + word</li>
@@ -131,6 +138,9 @@
                                         </ul>
                                     <li>Calculator: &emsp;&emsp;= + arithmetic expression</li>
                                     <li>Password Management</li>
+                                        <ul>
+                                            <li>KeePass: &nbsp;&nbsp;kee + space + keywords</li>
+                                        </ul>
                                     <li>System</li>
                                 </ul>
                               </div>
@@ -169,7 +179,7 @@
 
     <div class="body-bg"></div> <!-- Background Pattern -->
 
-    <!-- Auto input text
+    <!-- Auto input text -->
     <script type="text/javascript">
     var s = document.getElementById('s');
 
@@ -181,7 +191,7 @@
             s.value = type_this.substr(0, index++);
             setTimeout("next_letter()", 80);
         }
-    } -->
+    }
 
     next_letter();
     </script>

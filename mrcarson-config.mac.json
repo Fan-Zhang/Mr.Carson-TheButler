@@ -1,0 +1,21 @@
+{
+    "PluginConfig": {
+        "dict": {
+            "cmd": "open",
+            "url": "dict://"
+        },
+        "slack": {
+            "cmd": "open"
+        },
+        "file-search": {
+            "paths": [ "/Users/fan/Documents", "/Users/fan/Downloads", "/Users/fan/Movies", "/Users/fan/Music", "/Users/fan/Pictures", "/Users/fan/Public", "/Users/fan/Desktop" ]
+        },
+        "file-open": {
+            "cmd": "open"
+        },
+        "keepass": {
+            "file": "/Users/fan/Documents/stack/Project/test.kdbx",
+            "password": "kee"
+        }
+    }
+}
