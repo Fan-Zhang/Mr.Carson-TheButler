@@ -3,7 +3,7 @@
             fix how may I help you sir
             catch exception
             auto completion g -> google y -> yahoo  youtube amazon  see alfred web search
-            add System function such as Empty Trash, Show Trash, Quit, Log Out, Sleep, Restart, Shut Down
+            add System function such as Empty Trash, Show Trash, Quit, Log Out, Sleep, Restart, Shut Down, Volume Up/Down
             menu box
             change theme
             sandbox
@@ -65,7 +65,6 @@
                                     <input
                                         type="search"
                                         class="form-control"
-                                        value="Please provide a config file to continue."
                                         onblur="if (this.value == '') {this.value = 'How may I help you, sir/ma\'am?';}"
                                         onfocus="if (this.value == 'How may I help you, sir/ma\'am?') {this.value = '';}"
                                         id="s"
@@ -135,6 +134,9 @@
                                         <ul>
                                             <li>Dictionary: &nbsp;&nbsp;d/dic + space + word</li>
                                             <li>Slack: &emsp;&emsp;&emsp;s/slack</li>
+                                            <li>Firefox: &emsp;&emsp;&emsp;f/firefox</li>
+                                            <li>Chrome: &emsp;&emsp;&emsp;c/chrome</li>
+                                            <li>TextEdit: &emsp;&emsp;&emsp;t/text</li>
                                         </ul>
                                     <li>Calculator: &emsp;&emsp;= + arithmetic expression</li>
                                     <li>Password Management</li>
@@ -183,7 +185,7 @@
     <script type="text/javascript">
     var s = document.getElementById('s');
 
-    var type_this = "What are you looking for?";
+    var type_this = "Please provide a config file to continue.";
     var index = 0;
 
     window.next_letter = function() {

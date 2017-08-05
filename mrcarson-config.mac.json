@@ -7,6 +7,15 @@
         "slack": {
             "cmd": "open"
         },
+        "firefox": {
+            "cmd": "open"
+        },
+        "chrome": {
+            "cmd": "open"
+        },
+        "text-edit": {
+            "cmd": "open"
+        },
         "file-search": {
             "paths": [ "/Users/fan/Documents", "/Users/fan/Downloads", "/Users/fan/Movies", "/Users/fan/Music", "/Users/fan/Pictures", "/Users/fan/Public", "/Users/fan/Desktop" ]
         },

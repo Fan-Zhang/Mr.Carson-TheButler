@@ -1,9 +1,8 @@
 // TODO AUTO-COMPLETION
+//      keepass password input -- use pop up window
 //      webSearch: Max
 //      merge webSearch url to plugins
-//      AJAX
 //      MANUAL  G GOOGLE SL SLACK
-//      MODIFY OUTPUT BOX TO SHOW NAV BAR
 //      WHAT FEATURE IS ACTIVATED
 
 /*** Frontend script ***/
@@ -37,9 +36,24 @@ jQuery(document).ready(function() {
                     try {
                         config = JSON.parse(evt.target.result);
                         updateOutput('Config file loaded successfully!');
-                        jQuery('#s').prop("disabled", false)
-                                    .val("How may I help you, sir/ma'am?")
-                                    .focus();
+
+                        jQuery('#s').prop("disabled", false);
+
+                        var s = document.getElementById('s');
+						var type_this = "How may I help you, sir/ma\'am?";
+                        var index = 0;
+
+                        window.next_letter = function() {
+                            if (index <= type_this.length) {
+                                s.value = type_this.substr(0, index++);
+                                setTimeout("next_letter()", 80);
+                            }
+                        }
+
+                        next_letter();
+
+                        jQuery('#s').focus();
+
                         jQuery('#config-drop-zone').toggle();
                     } catch (err) {
                         updateOutput(err.message);
@@ -99,19 +113,22 @@ var plugins = [
      * Action returns a string that serves as an immediate feedback.
      * Action may throw exceptions.
      */
-    { id: 'calculator',  pattern: /^= /,          action: calculator    },
-    { id: 'google',      pattern: /^(g|google) /, action: webSearch     },
-    { id: 'lucky',      pattern: /^lucky /, action: webSearch     },
-    { id: 'youtube',     pattern: /^(yo|youtube) /, action: webSearch   },
-    { id: 'yahoo',       pattern: /^(y|yahoo) /, action: webSearch      },
-    { id: 'bing',        pattern: /^(b|bing) /, action: webSearch       },
-    { id: 'amazon',        pattern: /^(a|amazon) /, action: webSearch       },
-    { id: 'maps',        pattern: /^maps /, action: webSearch       },
-    { id: 'dict',        pattern: /^(d|dic) /,    action: openApp       },
-    { id: 'slack',       pattern: /^(s|slack)/,  action: openApp        },
-    { id: 'file-search', pattern: /^'/,           action: fileSearch    },
-    { id: 'file-open', pattern: /^\//,           action: openApp    },
-    { id: 'keepass',     pattern: /^k|kee /,      action: keePassSearch },
+    { id: 'calculator',  pattern: /^= /,            action: calculator    },
+    { id: 'google',      pattern: /^(g|google) /,   action: webSearch     },
+    { id: 'lucky',       pattern: /^lucky /,        action: webSearch     },
+    { id: 'youtube',     pattern: /^(yo|youtube) /,   action: webSearch   },
+    { id: 'yahoo',       pattern: /^(y|yahoo) /,   action: webSearch      },
+    { id: 'bing',        pattern: /^(b|bing) /,   action: webSearch       },
+    { id: 'amazon',      pattern: /^(a|amazon) /, action: webSearch       },
+    { id: 'maps',        pattern: /^maps /,       action: webSearch       },
+    { id: 'dict',        pattern: /^(d|dic) /,      action: openApp       },
+    { id: 'slack',       pattern: /^(s|slack)/,    action: openApp        },
+    { id: 'firefox',     pattern: /^(f|firefox)/,    action: openApp      },
+    { id: 'chrome',     pattern: /^(c|chrome)/,    action: openApp      },
+    { id: 'text-edit',     pattern: /^(t|text)/,    action: openApp      },
+    { id: 'file-search', pattern: /^'/,             action: fileSearch    },
+    { id: 'file-open',   pattern: /^\//,               action: openApp    },
+    { id: 'keepass',     pattern: /^k|kee /,        action: keePassSearch },
 ];
 
 function calculator(config, input, pluginInput, callback) {
@@ -154,7 +171,7 @@ function webSearch(config, input, pluginInput, callback) {
 
 function openApp(config, input, pluginInput, callback) {
     jQuery.get('/app',
-               { input: input, config: config },
+               { input: input, pluginInput: pluginInput, config: config },
                function(data, status) {
                    callback(data);
                }

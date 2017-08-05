@@ -7,20 +7,45 @@ const kpio = require('keepass.io');
 server.use('/', express.static(__dirname + '/web'));
 
 server.get('/app', function (req, res) {
+    var input = req.query.input;
+    var pluginInput = input.substring(input.indexOf(' ')+1);
+    var cmd = req.query.config.cmd;
+
     if (!(req.query.input && req.query.config && req.query.config.cmd)) {
         res.send("Server: Invalid input or configuration.");
         return;
     }
 
-    var input = req.query.input;
-    var cmd = req.query.config.cmd;
-    var params = [];
+    var apps = [
+        { id: 'dict',        pattern: /^(d|dic) /,  params: [req.query.config.url+pluginInput] },
+        { id: 'slack',       pattern: /^(s|slack)/,                params: ['-a', 'Slack.app'] },
+        { id: 'firefox',       pattern: /^(f|firefox)/,          params: ['-a', 'Firefox.app'] },
+        { id: 'chrome',       pattern: /^(c|chrome)/,      params: ['-a', 'Google\ Chrome.app'] },
+        { id: 'text-edit',   pattern: /^(t|text)/,               params: ['-a', 'TextEdit.app'] },
+        { id: 'file-open',   pattern: /^\//,                                   params: [input] },
+    ];
 
+    for (var i in apps) {
+        var app = apps[i];
+        var params = app.params;
+        if (app.pattern.test(input)) {
+            execFile(cmd, params, function (err, stdout, stderr) {
+                if (err) {
+                    res.send('Server: Failed to open app.');
+                } else {
+                    res.send('Server: Success!');
+                }
+            });
+        }
+    }
+
+    /*
     if (/^(d|dic) /.test(input)) {
         var key = input.substring(input.indexOf(' ')+1);
         params = [req.query.config.url+key];
     } else if (/^(s|slack)/.test(input)) {
         params = ['-a', 'Slack.app'];
+        // file-open
     } else if (/^\//.test(input)) {
         params = [input];
     }
@@ -34,6 +59,7 @@ server.get('/app', function (req, res) {
             res.send('Server: Success!');
         }
     });
+    */
 });
 
 server.get('/search', function (req, res) {
