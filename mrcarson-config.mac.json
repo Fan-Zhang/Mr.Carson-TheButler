@@ -1,156 +1,166 @@
 {
     "PluginConfig": [
         {
-             "id": "calculator",
+             "id"     : "calculator",
              "pattern": "^= ",
-             "action": "calculator"
+             "action" : "calculator"
         },
         {
-             "id": "amazon",
+             "id"     : "amazon",
              "pattern": "^(a|amazon) ",
-             "action": "webSearch",
-             "url": "https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords="
+             "action" : "webSearch",
+             "url"    : "https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords="
         },
         {
-             "id": "bing",
+             "id"     : "bing",
              "pattern": "^(b|bing) ",
-             "action": "webSearch",
-             "url": "https://www.bing.com/search?q="
+             "action" : "webSearch",
+             "url"    : "https://www.bing.com/search?q="
         },
         {
-             "id": "google",
+             "id"     : "google",
              "pattern": "^(g|google) ",
-             "action": "webSearch",
-             "url": "https://www.google.com/search?q="
+             "action" : "webSearch",
+             "url"    : "https://www.google.com/search?q="
         },
         {
-             "id": "lucky",
+             "id"     : "lucky",
              "pattern": "^lucky ",
-             "action": "webSearch",
-             "url": "https://www.google.com/search?q=",
-			 "url2": "&btnI"
+             "action" : "webSearch",
+             "url"    : "https://www.google.com/search?q=",
+			 "param"   : "&btnI"
         },
         {
-             "id": "maps",
+             "id"     : "maps",
              "pattern": "^maps ",
-             "action": "webSearch",
-             "url": "https://www.google.com/maps/search/?api=1&query="
+             "action" : "webSearch",
+             "url"    : "https://www.google.com/maps/search/?api=1&query="
         },
         {
-             "id": "youtube",
+             "id"     : "youtube",
              "pattern": "^(yo|youtube) ",
-             "action": "webSearch",
-             "url": "https://www.youtube.com/results?search_query="
+             "action" : "webSearch",
+             "url"    : "https://www.youtube.com/results?search_query="
         },
         {
-             "id": "yahoo",
+             "id"     : "yahoo",
              "pattern": "^(y|yahoo) ",
-             "action": "webSearch",
-             "url": "https://search.yahoo.com/search?p="
+             "action" : "webSearch",
+             "url"    : "https://search.yahoo.com/search?p="
         },
         {
-             "id": "calendar",
+             "id"     : "calendar",
              "pattern": "^(ca|calendar)$",
-             "action": "openApp",
-            "cmd": "open",
-			"params": ["-a", "calendar"]
+             "action" : "openApp",
+             "cmd"    : "open",
+			 "params" : ["-a", "calendar"]
         },
         {
-             "id": "dict",
+             "id"     : "dict",
              "pattern": "^(d|dic) ",
-             "action": "openApp",
-            "cmd": "open",
-            "url": "dict://"
+             "action" : "openApp",
+             "cmd"    : "open",
+             "url"    : "dict://"
         },
         {
-             "id": "firefox",
+             "id"     : "firefox",
              "pattern": "^(f|firefox)$",
-             "action": "openApp",
-            "cmd": "open",
-			"params": ["-a", "firefox"]
+             "action" : "openApp",
+             "cmd"    : "open",
+			 "params" : ["-a", "firefox"]
         },
         {
-             "id": "google chrome",
+             "id"     : "google chrome",
              "pattern": "^(ch|chrome)$",
-             "action": "openApp",
-            "cmd": "open",
-			"params": ["-a", "google chrome"]
+             "action" : "openApp",
+             "cmd"    : "open",
+			 "params" : ["-a", "google chrome"]
         },
         {
-             "id": "iterm",
+             "id"     : "iterm",
              "pattern": "^(i|iterm)$",
-             "action": "openApp",
-            "cmd": "open",
-			"params": ["-a", "iterm"]
+             "action" : "openApp",
+             "cmd"    : "open",
+			 "params" : ["-a", "iterm"]
         },
         {
-             "id": "macvim",
+             "id"     : "macvim",
              "pattern": "^mv$",
-             "action": "openApp",
-            "cmd": "open",
-			"params": ["-a", "macvim"]
+             "action" : "openApp",
+             "cmd"    : "open",
+			 "params" : ["-a", "macvim"]
         },
         {
-             "id": "slack",
+             "id"     : "slack",
              "pattern": "^(sl|slack)$",
-             "action": "openApp",
-            "cmd": "open",
-			"params": ["-a", "slack"]
+             "action" : "openApp",
+             "cmd"    : "open",
+			 "params" : ["-a", "slack"]
         },
         {
-             "id": "safari",
+             "id"     : "safari",
              "pattern": "^(sa|safari)$",
-             "action": "openApp",
-            "cmd": "open",
-			"params": ["-a", "safari"]
+             "action" : "openApp",
+             "cmd"    : "open",
+			 "params" : ["-a", "safari"]
         },
         {
-             "id": "textedit",
+             "id"     : "textedit",
              "pattern": "^text$",
-             "action": "openApp",
-            "cmd": "open",
-			"params": ["-a", "textedit"]
+             "action" : "openApp",
+             "cmd"    : "open",
+			 "params" : ["-a", "textedit"]
         },
         {
-             "id": "terminal",
+             "id"     : "terminal",
              "pattern": "^(ter|terminal)$",
-             "action": "openApp",
-            "cmd": "open",
-			"params": ["-a", "terminal"]
+             "action" : "openApp",
+             "cmd"    : "open",
+			 "params" : ["-a", "terminal"]
         },
         {
-               "id": "file-search",
+             "id"     : "search file",
              "pattern": "^'",
-             "action": "fileSearch",
-            "paths": [ "/Users/fan/Documents", "/Users/fan/Downloads", "/Users/fan/Movies", "/Users/fan/Music", "/Users/fan/Pictures", "/Users/fan/Public", "/Users/fan/Desktop" ]
+             "action" : "fileSearch",
+			 "cmd"    : "find",
+             "paths"  : [ "/Users/fan/Documents", "/Users/fan/Downloads", "/Users/fan/Movies", "/Users/fan/Music", "/Users/fan/Pictures", "/Users/fan/Public", "/Users/fan/Desktop" ],
+			 "params" : ["-atime", "-30", "-type", "f", "-iname"]
         },
         {
-             "id": "file-open",
+             "id"     : "open file",
              "pattern": "^\/",
-             "action": "openApp",
-            "cmd": "open"
+             "action" : "openApp",
+             "cmd"    : "open"
         },
         {
-                  "id": "keepass",
-             "pattern": "^k|kee ",
-             "action": "keePassSearch",
-                "file": "/Users/fan/Documents/stack/Project/test.kdbx",
-            "password": "kee"
+             "id"     : "open trash",
+             "pattern": "^trash$",
+             "action" : "openApp",
+             "path"   : ".Trash/",
+             "cmd"    : "open"
         },
         {
-             "id": "empty trash",
+             "id"     : "empty trash",
              "pattern": "^et$",
-             "action": "system",
-             "path": ".Trash/*",
+             "action" : "system",
+             "path"   : ".Trash/",
+             "cmd"    : "rm -r ",
              "message": "Server: Emptying trash..."
         },
         {
-             "id": "sleep",
+             "id"     : "sleep",
              "pattern": "^sleep$",
-             "action": "system",
-            "cmd": "pmset",
-			"params": ["sleepnow"],
+             "action" : "system",
+             "cmd"    : "pmset",
+			 "params" : ["sleepnow"],
              "message": "Server: Sleeping..."
+        },
+        {
+            "id"      : "keepass",
+            "pattern" : "^k|kee ",
+            "action"  : "keePassSearch",
+            "file"    : "/Users/fan/Documents/stack/Project/test.kdbx",
+            "password": "kee"
         }
     ]
 }

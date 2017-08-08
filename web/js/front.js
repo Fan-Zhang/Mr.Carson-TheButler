@@ -1,11 +1,8 @@
 // TODO 
 //      CLEAR INPUT BOX SHORTKEY !!!
-//      SHOW TRASH AND EMPTY TRASH
 //      USE FINDER TO OPEN FILE
 //      AUTO-COMPLETION
 //      webSearch: Max
-//      merge webSearch url to plugins
-//      MANUAL  G GOOGLE SL SLACK
 //      DYNAMIC FEEDBACK -- WHAT FEATURE IS ACTIVATED
 
 /*** Frontend script ***/
@@ -157,7 +154,7 @@ function webSearch(config, input, pluginInput, callback) {
     var newWindow = null;
 
     if (config.id === 'lucky') {
-        newWindow = window.open(config.url + encodeURIComponent(pluginInput) + config.url2);
+        newWindow = window.open(config.url + encodeURIComponent(pluginInput) + config.param);
     } else {
         newWindow = window.open(config.url + encodeURIComponent(pluginInput));
     }
@@ -173,10 +170,31 @@ function openApp(config, input, pluginInput, callback) {
     jQuery.get('/app',
                { input: input, pluginInput: pluginInput, config: config },
                function(data, status) {
-                   callback(data);
+                   if (data === 'Yes\nNo') {
+                       emptyTrash();
+                   } else {
+                       callback(data);
+                   }
                }
     );
     return 'Opening app ...';
+}
+
+// helper function for empty Trash after openning Trash
+function emptyTrash() {
+    for (var i in plugins) {
+        if (plugins[i].id === 'empty trash') {
+            var pluginConfig = plugins[i];
+        }
+    }
+
+    jQuery('#output').html('Yes'.link('#')+'\n'+'No'.link('#'));
+
+    jQuery('#output a').on('click', function() {
+        if (jQuery(this).text() === 'Yes') {
+            system(pluginConfig, 'et', 'et', updateOutput);
+        }
+    });
 }
 
 function system(config, input, pluginInput, callback) {

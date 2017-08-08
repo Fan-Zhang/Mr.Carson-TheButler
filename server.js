@@ -24,19 +24,26 @@ server.get('/app', function (req, res) {
     var params = [];
     if (id === 'dict') {
         params = [req.query.config.url + pluginInput];
-    } else if (id === 'file-open') {
-        params = [pluginInput];
+    } else if (id === 'open file') {
+        params = [req.query.input];
+    } else if (id === 'open trash') {
+        params = [path.join(process.env['HOME'], req.query.config.path)]; 
     } else {
-        params = ['-a', id];
+        params = req.query.config.params;
     }
 
     // http://ourcodeworld.com/articles/read/154/how-to-execute-an-exe-file-system-application-using-electron-framework
     // https://nodejs.org/api/child_process.html#child_process_child_process_execfile_file_args_options_callback
     execFile(cmd, params, function (err, stdout, stderr) {
         if (err) {
+            console.log(err);
             res.send('Server: Failed to open app.');
         } else {
-            res.send('Server: Success!');
+            if (id === 'open trash') {
+                res.send('Yes\nNo');
+            } else {
+                res.send('Server: Success!');
+            }
         }
     });
 });
@@ -57,7 +64,7 @@ server.get('/sys', function (req, res) {
         var pTrash = req.query.config.path;
         var pathTrash = path.join(homeDir, pTrash);
 
-		fs.readdir(pathTrash.slice(0,-2), function(err, files) {
+		fs.readdir(pathTrash, function(err, files) {
             if (err) {
                 console.log(err);
                 res.send('Server: Please check the path of your Trash direcotry');
@@ -66,7 +73,7 @@ server.get('/sys', function (req, res) {
                 if (files.length === 1) {
                     res.send('Server: Trash is empty now.');
                 } else {
-                    exec('rm -r ' + pathTrash, function (err, stdout, stderr) {
+                    exec(cmd + pathTrash+'*', function (err, stdout, stderr) {
                         if (err) {
                             console.log(err);
                             res.send('Server: Failed to empty Trash.');
@@ -89,15 +96,18 @@ server.get('/sys', function (req, res) {
 
 // fileSearch
 server.get('/search', function (req, res) {
-    if (!(req.query.input && req.query.config && req.query.config.paths)) {
+    var input = req.query.input;
+    var config = req.query.config;
+    var paths = req.query.config.paths;
+    var cmd = req.query.config.cmd;
+    var p = req.query.config.params;
+
+    if (!(input && config && paths)) {
         res.send("Server: Invalid input or configuration.");
         return;
     }
 
-    var input = req.query.input;
-    var cmd = 'find';
-    var params = req.query.config.paths.concat(
-        ['-iname', '*'+input+'*', '-atime', '-30', '-type', 'f']);
+    var params = paths.concat(p).concat(['*'+input+'*']);
 
     execFile(cmd, params, function (err, stdout, stderr) {
         if (err) {
