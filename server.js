@@ -1,53 +1,33 @@
-// TODO: ERROR IN CONSOLE GET http://localhost:3000/app?name=slack net::ERR_CONNECTION_REFUSED
+//TODO:
+//      PACKAGE.JSON
 const express = require('express');
 const server = express();
 const { execFile } = require('child_process');
+const { exec } = require('child_process');
 const kpio = require('keepass.io');
+const path = require('path');
+const fs = require('fs');
 
 server.use('/', express.static(__dirname + '/web'));
 
+// openApp
 server.get('/app', function (req, res) {
-    var input = req.query.input;
-    var pluginInput = input.substring(input.indexOf(' ')+1);
+    var pluginInput = req.query.pluginInput;
+    var id = req.query.config.id;
     var cmd = req.query.config.cmd;
 
-    if (!(req.query.input && req.query.config && req.query.config.cmd)) {
+    if (!(req.query.input && req.query.config && cmd)) {
         res.send("Server: Invalid input or configuration.");
         return;
     }
 
-    var apps = [
-        { id: 'dict',        pattern: /^(d|dic) /,  params: [req.query.config.url+pluginInput] },
-        { id: 'slack',       pattern: /^(s|slack)/,                params: ['-a', 'Slack.app'] },
-        { id: 'firefox',       pattern: /^(f|firefox)/,          params: ['-a', 'Firefox.app'] },
-        { id: 'chrome',       pattern: /^(c|chrome)/,      params: ['-a', 'Google\ Chrome.app'] },
-        { id: 'text-edit',   pattern: /^(t|text)/,               params: ['-a', 'TextEdit.app'] },
-        { id: 'file-open',   pattern: /^\//,                                   params: [input] },
-    ];
-
-    for (var i in apps) {
-        var app = apps[i];
-        var params = app.params;
-        if (app.pattern.test(input)) {
-            execFile(cmd, params, function (err, stdout, stderr) {
-                if (err) {
-                    res.send('Server: Failed to open app.');
-                } else {
-                    res.send('Server: Success!');
-                }
-            });
-        }
-    }
-
-    /*
-    if (/^(d|dic) /.test(input)) {
-        var key = input.substring(input.indexOf(' ')+1);
-        params = [req.query.config.url+key];
-    } else if (/^(s|slack)/.test(input)) {
-        params = ['-a', 'Slack.app'];
-        // file-open
-    } else if (/^\//.test(input)) {
-        params = [input];
+    var params = [];
+    if (id === 'dict') {
+        params = [req.query.config.url + pluginInput];
+    } else if (id === 'file-open') {
+        params = [pluginInput];
+    } else {
+        params = ['-a', id];
     }
 
     // http://ourcodeworld.com/articles/read/154/how-to-execute-an-exe-file-system-application-using-electron-framework
@@ -59,9 +39,55 @@ server.get('/app', function (req, res) {
             res.send('Server: Success!');
         }
     });
-    */
 });
 
+// system
+server.get('/sys', function (req, res) {
+    var id = req.query.config.id;
+    var cmd = req.query.config.cmd;
+    var params = req.query.config.params;
+
+    if (!(req.query.input && req.query.config)) {
+        res.send("Server: Invalid input or configuration.");
+        return;
+    }
+
+    if (id === 'empty trash') {
+        var homeDir = process.env['HOME'];
+        var pTrash = req.query.config.path;
+        var pathTrash = path.join(homeDir, pTrash);
+
+		fs.readdir(pathTrash.slice(0,-2), function(err, files) {
+            if (err) {
+                console.log(err);
+                res.send('Server: Please check the path of your Trash direcotry');
+            } else {
+                // Trash is empty
+                if (files.length === 1) {
+                    res.send('Server: Trash is empty now.');
+                } else {
+                    exec('rm -r ' + pathTrash, function (err, stdout, stderr) {
+                        if (err) {
+                            console.log(err);
+                            res.send('Server: Failed to empty Trash.');
+                        } else {
+                            res.send('Server: Success!');
+                        }
+                    });
+                }
+            }
+        });
+    } else if (id === 'sleep') {
+        execFile(cmd, params, function (err, stdout, stderr) {
+            if (err) {
+                console.log(err);
+                res.send("Server: Failed to sleep.");
+            }
+        });
+    }
+});
+
+// fileSearch
 server.get('/search', function (req, res) {
     if (!(req.query.input && req.query.config && req.query.config.paths)) {
         res.send("Server: Invalid input or configuration.");
@@ -82,6 +108,7 @@ server.get('/search', function (req, res) {
     });
 });
 
+// keePassSearch
 server.get('/keepass', function (req, res) {
     if (!(req.query.input && req.query.config && req.query.config.file && req.query.config.password)) {
         res.send("Server: Invalid input or configuration.");
