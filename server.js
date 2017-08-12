@@ -40,7 +40,8 @@ server.get('/app', function (req, res) {
             res.send('Server: Failed to open app.');
         } else {
             if (id === 'open trash') {
-                res.send('Yes\nNo');
+                //res.send('Do you want to empyt the Trash ?\nYes\nNo');
+                res.send('Server: Open Trash Success!');
             } else {
                 res.send('Server: Success!');
             }

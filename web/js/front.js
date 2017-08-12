@@ -170,7 +170,8 @@ function openApp(config, input, pluginInput, callback) {
     jQuery.get('/app',
                { input: input, pluginInput: pluginInput, config: config },
                function(data, status) {
-                   if (data === 'Yes\nNo') {
+                   //if (data === 'Yes\nNo') {
+                   if (data.includes('Trash')) {
                        emptyTrash();
                    } else {
                        callback(data);
@@ -188,7 +189,7 @@ function emptyTrash() {
         }
     }
 
-    jQuery('#output').html('Yes'.link('#')+'\n'+'No'.link('#'));
+    jQuery('#output').html('Do you want to empyt the Trash ?'+'\n'+'\n'+'Yes'.link('#')+'\n'+'No'.link('#'));
 
     jQuery('#output a').on('click', function() {
         if (jQuery(this).text() === 'Yes') {
