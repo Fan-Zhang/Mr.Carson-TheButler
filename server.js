@@ -1,5 +1,9 @@
-//TODO:
-//      PACKAGE.JSON
+// Copyright (c) 2017 Fan Zhang
+// This work is available under the "MIT license".
+// Please see the file COPYING in this source
+// distribution for license terms.
+
+
 const express = require('express');
 const server = express();
 const { execFile } = require('child_process');
@@ -12,14 +16,14 @@ server.use('/', express.static(__dirname + '/web'));
 
 // openApp
 server.get('/app', function (req, res) {
-    var pluginInput = req.query.pluginInput;
-    var id = req.query.config.id;
-    var cmd = req.query.config.cmd;
-
-    if (!(req.query.input && req.query.config && cmd)) {
+    if (!(req.query.input && req.query.config && req.query.config.cmd)) {
         res.send("Server: Invalid input or configuration.");
         return;
     }
+
+    var pluginInput = req.query.pluginInput;
+    var id = req.query.config.id;
+    var cmd = req.query.config.cmd;
 
     var params = [];
     if (id === 'dict') {
@@ -51,14 +55,14 @@ server.get('/app', function (req, res) {
 
 // system
 server.get('/sys', function (req, res) {
-    var id = req.query.config.id;
-    var cmd = req.query.config.cmd;
-    var params = req.query.config.params;
-
     if (!(req.query.input && req.query.config)) {
         res.send("Server: Invalid input or configuration.");
         return;
     }
+
+    var id = req.query.config.id;
+    var cmd = req.query.config.cmd;
+    var params = req.query.config.params;
 
     if (id === 'empty trash') {
         var homeDir = process.env['HOME'];
@@ -97,16 +101,16 @@ server.get('/sys', function (req, res) {
 
 // fileSearch
 server.get('/search', function (req, res) {
+    if (!(req.query.input && req.query.config && req.query.config.paths)) {
+        res.send("Server: Invalid input or configuration.");
+        return;
+    }
+
     var input = req.query.input;
     var config = req.query.config;
     var paths = req.query.config.paths;
     var cmd = req.query.config.cmd;
     var p = req.query.config.params;
-
-    if (!(input && config && paths)) {
-        res.send("Server: Invalid input or configuration.");
-        return;
-    }
 
     var params = paths.concat(p).concat(['*'+input+'*']);
 

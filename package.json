@@ -1,15 +1,19 @@
 {
-  "name": "Mr.Carson-TheButler",
-  "version": "1.0.0",
-  "description": "A web-based application that allows users to interact with the operating system using keyboard shortcut.",
+  "name":         "Mr.Carson-TheButler",
+  "version":      "1.0.0",
+  "description":  "A web-based application that allows a user to interact with the operating system using keyboard shortcut.",
   "dependencies": {
-    "express": "^4.15.3",
+    "express":    "^4.15.3",
     "keepass.io": "^1.1.4"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Fan-Zhang/Mr.Carson-TheButler"
+  "engines": {
+      "node": "8.2.1"
   },
-  "author": "Fan Zhang",
-  "license": "MIT"
+  "repository": {
+    "type":       "git",
+    "url":        "https://github.com/Fan-Zhang/Mr.Carson-TheButler"
+  },
+  "author":       "Fan Zhang",
+  "license":      "MIT",
+  "homepage":     "https://github.com/Fan-Zhang/Mr.Carson-TheButler#readme"
 }

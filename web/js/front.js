@@ -1,8 +1,12 @@
+// Copyright (c) 2017 Fan Zhang
+// This work is available under the "MIT license".
+// Please see the file COPYING in this source
+// distribution for license terms.
+
+
 // TODO 
-//      CLEAR INPUT BOX SHORTKEY !!!
 //      USE FINDER TO OPEN FILE
 //      AUTO-COMPLETION
-//      webSearch: Max
 //      DYNAMIC FEEDBACK -- WHAT FEATURE IS ACTIVATED
 
 /*** Frontend script ***/
