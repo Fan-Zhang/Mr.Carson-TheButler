@@ -4,11 +4,6 @@
 // distribution for license terms.
 
 
-// TODO 
-//      USE FINDER TO OPEN FILE
-//      AUTO-COMPLETION
-//      DYNAMIC FEEDBACK -- WHAT FEATURE IS ACTIVATED
-
 /*** Frontend script ***/
 jQuery(document).ready(function() {
     jQuery('#s').on('keypress', function(evt) {
@@ -72,8 +67,9 @@ jQuery(document).ready(function() {
 
 });  // jQuery(document).ready(function() {...});
 
-/* Each plugin needs to provide a pattern
- * and an action, which is executed when matched.
+/* Each plugin needs to provide an id, a pattern,
+ * an action, which is executed when matched,
+ * and some other plugin-specific configurations.
  *
  * Action is a function that takes
  *     - the config object
@@ -121,26 +117,6 @@ function dispatch(input)
 function updateOutput(output) {
     jQuery('#output').text(output);
 }
-
-
-/*
-    { id: 'calculator',  pattern: /^= /,            action: calculator    },
-    { id: 'google',      pattern: /^(g|google) /,   action: webSearch     },
-    { id: 'lucky',       pattern: /^lucky /,        action: webSearch     },
-    { id: 'youtube',     pattern: /^(yo|youtube) /,   action: webSearch   },
-    { id: 'yahoo',       pattern: /^(y|yahoo) /,   action: webSearch      },
-    { id: 'bing',        pattern: /^(b|bing) /,   action: webSearch       },
-    { id: 'amazon',      pattern: /^(a|amazon) /, action: webSearch       },
-    { id: 'maps',        pattern: /^maps /,       action: webSearch       },
-    { id: 'dict',        pattern: /^(d|dic) /,      action: openApp       },
-    { id: 'slack',       pattern: /^(s|slack)/,    action: openApp        },
-    { id: 'firefox',     pattern: /^(f|firefox)/,    action: openApp      },
-    { id: 'chrome',     pattern: /^(c|chrome)/,    action: openApp      },
-    { id: 'text-edit',     pattern: /^(t|text)/,    action: openApp      },
-    { id: 'file-search', pattern: /^'/,             action: fileSearch    },
-    { id: 'file-open',   pattern: /^\//,               action: openApp    },
-    { id: 'keepass',     pattern: /^k|kee /,        action: keePassSearch },
-*/
 
 function calculator(config, input, pluginInput, callback) {
     // Allowed symbols: + - * / % space () . 0-9

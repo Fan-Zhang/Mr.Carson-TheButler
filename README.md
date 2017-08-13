@@ -10,19 +10,28 @@ With the configuration system, `Mr.Carson` can be configured to work on various 
 ### Prerequisites
 Make sure to have [node](https://nodejs.org/en/download/) and [npm](https://www.npmjs.com/) installed.
 
-Check that you have node and npm installed:
+Check that you have node and npm:
 
 	node -v
 	npm -v
 
 ### Installing
+Clone the repo
 
 	git clone https://github.com/Fan-Zhang/Mr.Carson-TheButler.git
+
+Change directory to the repo
+
 	cd Mr.Carson-TheButler
+
+Install dependencies
+
 	npm install
 
 ### Deploying
-Start the server on port 3000 by calling `node server.js`
+Start the server on port 3000
+
+    node server.js
 
 ## Dependencies
 
@@ -35,15 +44,8 @@ Since the project consists of several components and each component has individu
 
 ### `index.html`
 * `jquey` - HTML document traversal, event handling and Ajax
-* `bootStrap` - Front-end framework
+* `bootStrap` - Front-end framework / `fontawesome`
 * `css` - Styling
-
-### Current Status:
-* Finished calculator
-* Working on web searching feature
-
-### Next Step:
-* Create a server and implement the file searching feature
 
 # Contact Info
 Email me at fzhang at pdx dot edu

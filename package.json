@@ -1,7 +1,7 @@
 {
   "name":         "mr.carson",
   "version":      "1.0.0",
-  "description":  "A web-based application that allows a user to interact with the operating system using keyboard shortcut.",
+  "description":  "A web-based application that allows user to interact with the operating system using keyboard shortcut.",
   "dependencies": {
     "express":    "^4.15.3",
     "keepass.io": "^1.1.4"
