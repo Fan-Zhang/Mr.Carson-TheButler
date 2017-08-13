@@ -1,5 +1,5 @@
 {
-  "name":         "Mr.Carson-TheButler",
+  "name":         "mr.carson",
   "version":      "1.0.0",
   "description":  "A web-based application that allows a user to interact with the operating system using keyboard shortcut.",
   "dependencies": {
