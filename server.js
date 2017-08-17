@@ -6,8 +6,8 @@
 
 const express = require('express');
 const server = express();
-const { execFile } = require('child_process');
-const { exec } = require('child_process');
+const execFile = require('child_process').execFile;
+const exec = require('child_process').exec;
 const kpio = require('keepass.io');
 const path = require('path');
 const fs = require('fs');
