@@ -5,6 +5,10 @@ This is a web-based utility application that allows a user to control the operat
 
 With the configuration system, `Mr.Carson` can be configured to work on various operating systems and support user custom searches and features.
 
+For a short demo of the use cases:
+
+[https://youtu.be/rqtykRWg8uo](https://youtu.be/rqtykRWg8uo)
+
 ## Deploying
 
 ### Prerequisites
